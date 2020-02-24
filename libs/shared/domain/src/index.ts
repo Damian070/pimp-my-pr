@@ -10,3 +10,5 @@ export * from './lib/interfaces/pr.statistics';
 export * from './lib/requests';
 export * from './lib/interfaces/pr-reviewer.interface';
 export * from './lib/interfaces/pr-author.interface';
+export * from './lib/enums/platform.enum';
+export * from './lib/responses/auth.response';

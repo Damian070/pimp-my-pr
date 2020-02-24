@@ -115,6 +115,24 @@
     },
     "server-repository-core-domain-services": {
       "tags": ["platform:server", "scope:repository", "type:domain-services"]
+    },
+    "server-auth-shell": {
+      "tags": ["platform:server", "type:shell"]
+    },
+    "server-auth-api-rest": {
+      "tags": ["platform:server", "scope:auth", "type:api"]
+    },
+    "server-auth-core-application-services": {
+      "tags": ["platform:server", "scope:auth", "type:application-services"]
+    },
+    "server-auth-infrastructure": {
+      "tags": ["platform:server", "scope:auth", "type:infrastructure"]
+    },
+    "server-auth-core-domain-services": {
+      "tags": []
+    },
+    "server-auth-core-domain": {
+      "tags": []
     }
   }
 }

@@ -58,7 +58,7 @@
           },
           {
             "sourceTag": "scope:auth",
-            "onlyDependOnLibsWithTags": ["scope:shared", "scope:shared"]
+            "onlyDependOnLibsWithTags": ["scope:shared", "scope:auth"]
           },
           {
             "sourceTag": "scope:repository",
