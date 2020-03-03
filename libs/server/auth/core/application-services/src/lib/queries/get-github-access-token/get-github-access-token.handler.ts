@@ -11,14 +11,10 @@ export class GetGithubAccessTokenHandler
   constructor(private authRepository: BaseAuthRepository, private jwtService: JwtService) {}
 
   async execute(query: GetGithubAccessTokenQuery): Promise<AuthTokenReadModel> {
-    // TODO: handle exception
-    const githubAccessTokenRes = await this.authRepository.getGithubAccessToken(query.githubCode);
-
-    // TODO: parse to obj
-    const githubAccessToken = githubAccessTokenRes.split('&')[0].split('=')[1];
+    const { token } = await this.authRepository.getGithubAccessToken(query.githubCode);
 
     const jwtPayload = {
-      token: githubAccessToken,
+      token,
       platform: Platform.github
     };
 

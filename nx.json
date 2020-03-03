@@ -133,6 +133,9 @@
     },
     "server-auth-core-domain": {
       "tags": ["platform:server", "scope:auth", "type:domain"]
+    },
+    "shared-util-query-string": {
+      "tags": []
     }
   }
 }

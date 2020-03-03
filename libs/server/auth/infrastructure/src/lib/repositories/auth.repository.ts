@@ -1,8 +1,12 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { urlFactory } from '@valueadd/typed-urls';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { githubConfig, PmpApiServiceConfigService } from '@pimp-my-pr/server/shared/core';
 import { BaseAuthRepository } from '@pimp-my-pr/server/auth/core/domain-services';
+import { convertQueryStringToObj } from '@pimp-my-pr/shared/util-query-string';
+import { AuthTokenEntity } from '../../../../core/domain/src/lib/entities/auth-token.entity';
+import { mapGithubAuthToken } from '../mappers/map-github-auth-token';
+import { CoreUnauthorizedFoundException } from '@pimp-my-pr/server/shared/domain';
 
 @Injectable()
 export class AuthRepository extends BaseAuthRepository {
@@ -14,17 +18,24 @@ export class AuthRepository extends BaseAuthRepository {
     super();
   }
 
-  getGithubAccessToken(githubCode: string): Promise<string> {
+  getGithubAccessToken(githubCode: string): Promise<AuthTokenEntity> {
     const githubSecrets = {
       client_id: this.configService.getGithubClientId(),
       client_secret: this.configService.getGithubClientSecret(),
       code: githubCode
     };
 
-    // TODO: returns 200 when verification code is bad
     return this.httpService
       .post<string>(this.endpoints.getGithubAccessToken.url(), githubSecrets)
-      .pipe(map(res => res.data))
+      .pipe(
+        map(res => convertQueryStringToObj(res.data)),
+        tap(res => {
+          if (res.error) {
+            throw new CoreUnauthorizedFoundException(res.error_description || res.error);
+          }
+        }),
+        map(mapGithubAuthToken)
+      )
       .toPromise();
   }
 }
