@@ -1,1 +1,1 @@
-export * from './lib/server-auth-core-domain';
+export * from './lib/entities/auth-token.entity';

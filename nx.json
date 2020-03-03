@@ -129,10 +129,10 @@
       "tags": ["platform:server", "scope:auth", "type:infrastructure"]
     },
     "server-auth-core-domain-services": {
-      "tags": []
+      "tags": ["platform:server", "scope:auth", "type:domain-services"]
     },
     "server-auth-core-domain": {
-      "tags": []
+      "tags": ["platform:server", "scope:auth", "type:domain"]
     }
   }
 }
