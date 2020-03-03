@@ -1,22 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AuthFacade } from './auth.facade';
-import { GetGithubAccessTokenHandler } from './queries/handlers/get-github-access-token.handler';
+import { GetGithubAccessTokenHandler } from './queries/get-github-access-token/get-github-access-token.handler';
 import { CqrsModule } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
-import { ServerAuthInfrastructureModule } from '@pimp-my-pr/server/auth/infrastructure';
-import { PmpApiServiceConfigService, ServerSharedCoreModule } from '@pimp-my-pr/server/shared/core';
+// import { PmpApiServiceConfigService, ServerSharedCoreModule } from '@pimp-my-pr/server/shared/core';
 
 const QueryHandlers = [GetGithubAccessTokenHandler];
+
+// TODO
 
 @Module({
   imports: [
     CqrsModule,
-    ServerAuthInfrastructureModule,
     JwtModule.registerAsync({
-      imports: [ServerSharedCoreModule],
+      /*imports: [ServerSharedCoreModule],
       inject: [PmpApiServiceConfigService],
       useFactory: (configService: PmpApiServiceConfigService) => ({
         secret: configService.getJwtSecret()
+      })*/
+      useFactory: () => ({
+        secret: '123'
       })
     })
   ],

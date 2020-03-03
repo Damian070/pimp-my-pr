@@ -2,17 +2,17 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { urlFactory } from '@valueadd/typed-urls';
 import { map } from 'rxjs/operators';
 import { githubConfig, PmpApiServiceConfigService } from '@pimp-my-pr/server/shared/core';
+import { BaseAuthRepository } from '@pimp-my-pr/server/auth/core/domain-services';
 
 @Injectable()
-export class AuthDataService {
+export class AuthRepository extends BaseAuthRepository {
   endpoints = {
     getGithubAccessToken: urlFactory(githubConfig.authUrl)
   };
 
-  constructor(
-    private httpService: HttpService,
-    private configService: PmpApiServiceConfigService
-  ) {}
+  constructor(private httpService: HttpService, private configService: PmpApiServiceConfigService) {
+    super();
+  }
 
   getGithubAccessToken(githubCode: string): Promise<string> {
     const githubSecrets = {

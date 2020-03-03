@@ -1,10 +1,10 @@
 import { HttpModule, Module } from '@nestjs/common';
-import { AuthDataService } from './repositories/auth.data-service';
+import { AuthRepository } from './repositories/auth.repository';
 import { ServerSharedCoreModule } from '@pimp-my-pr/server/shared/core';
 
 @Module({
   imports: [HttpModule, ServerSharedCoreModule],
-  providers: [AuthDataService],
-  exports: [AuthDataService]
+  providers: [AuthRepository],
+  exports: [AuthRepository]
 })
 export class ServerAuthInfrastructureModule {}

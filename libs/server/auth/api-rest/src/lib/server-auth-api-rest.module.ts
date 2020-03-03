@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './controllers/auth.controller';
-import { ServerAuthCoreApplicationServicesModule } from '@pimp-my-pr/server/auth/core/application-services';
+import { ServerAuthShellModule } from '@pimp-my-pr/server/auth/shell';
 
 @Module({
-  imports: [ServerAuthCoreApplicationServicesModule],
+  imports: [ServerAuthShellModule],
   controllers: [AuthController]
 })
 export class ServerAuthApiRestModule {}
