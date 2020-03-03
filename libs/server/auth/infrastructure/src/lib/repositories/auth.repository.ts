@@ -4,7 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { githubConfig, PmpApiServiceConfigService } from '@pimp-my-pr/server/shared/core';
 import { BaseAuthRepository } from '@pimp-my-pr/server/auth/core/domain-services';
 import { convertQueryStringToObj } from '@pimp-my-pr/shared/util-query-string';
-import { AuthTokenEntity } from '../../../../core/domain/src/lib/entities/auth-token.entity';
+import { AuthTokenEntity } from '@pimp-my-pr/server/auth/core/domain';
 import { mapGithubAuthToken } from '../mappers/map-github-auth-token';
 import { CoreUnauthorizedFoundException } from '@pimp-my-pr/server/shared/domain';
 

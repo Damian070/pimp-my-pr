@@ -117,7 +117,7 @@
       "tags": ["platform:server", "scope:repository", "type:domain-services"]
     },
     "server-auth-shell": {
-      "tags": ["platform:server", "type:shell"]
+      "tags": ["platform:server", "scope:auth", "type:shell"]
     },
     "server-auth-api-rest": {
       "tags": ["platform:server", "scope:auth", "type:api"]
@@ -135,7 +135,7 @@
       "tags": ["platform:server", "scope:auth", "type:domain"]
     },
     "shared-util-query-string": {
-      "tags": []
+      "tags": ["platform:any", "scope:shared", "type:util"]
     }
   }
 }
