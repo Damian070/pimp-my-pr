@@ -2,13 +2,24 @@ import { Global, Module } from '@nestjs/common';
 import { ServerAuthCoreApplicationServicesModule } from '@pimp-my-pr/server/auth/core/application-services';
 import { BaseAuthRepository } from '@pimp-my-pr/server/auth/core/domain-services';
 import { AuthRepository } from '@pimp-my-pr/server/auth/infrastructure';
+import { PmpApiServiceConfigService, ServerSharedCoreModule } from '@pimp-my-pr/server/shared/core';
+import { JwtModule } from '@nestjs/jwt';
 
 const providers = [{ provide: BaseAuthRepository, useClass: AuthRepository }];
 
 @Global()
 @Module({
-  imports: [ServerAuthCoreApplicationServicesModule],
+  imports: [
+    JwtModule.registerAsync({
+      imports: [ServerSharedCoreModule],
+      inject: [PmpApiServiceConfigService],
+      useFactory: (configService: PmpApiServiceConfigService) => ({
+        secret: configService.getJwtSecret()
+      })
+    }),
+    ServerAuthCoreApplicationServicesModule
+  ],
   providers,
-  exports: [...providers, ServerAuthCoreApplicationServicesModule]
+  exports: [...providers, ServerAuthCoreApplicationServicesModule, JwtModule]
 })
 export class ServerAuthShellModule {}
