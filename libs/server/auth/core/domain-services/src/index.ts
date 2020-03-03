@@ -1,1 +1,1 @@
-export * from './lib/repositories/auth.repository';
+export * from './lib/repositories/base-auth.repository';
